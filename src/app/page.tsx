@@ -12,47 +12,102 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 
-type Book = {
-  title?: string;
-  author?: string;
-  genre?: string;
+export type Book = {
+  id?: number;
+  title: string;
+  author: string;
+  genre: string;
   cover?: string;
 };
 
 export default function Component() {
   const [books, setBooks] = useState<Book[]>([
-    {
-      title: "Harry potter and the order of phoenix",
-      author: "Author 1",
-      genre: "Genre 1",
-      cover:
-        "https://1.bp.blogspot.com/-HRRu6dw6FTI/UiGGOYfeeII/AAAAAAAAAV4/aLFjY4lAAXkpQzVzVrmi0Nicu-kNwqeKwCPcB/s1600/german.jpg",
-    },
-    {
-      title: "Book 2",
-      author: "Author 2",
-      genre: "Genre 2",
-      cover: "/placeholder.svg",
-    },
-    {
-      title: "Book 3",
-      author: "Author 3",
-      genre: "Genre 3",
-      cover: "/placeholder.svg",
-    },
+    // {
+    //   title: "Harry potter and the order of phoenix",
+    //   author: "Author 1",
+    //   genre: "Genre 1",
+    //   cover:
+    //     "https://1.bp.blogspot.com/-HRRu6dw6FTI/UiGGOYfeeII/AAAAAAAAAV4/aLFjY4lAAXkpQzVzVrmi0Nicu-kNwqeKwCPcB/s1600/german.jpg",
+    // },
+    // {
+    //   title: "Book 2",
+    //   author: "Author 2",
+    //   genre: "Genre 2",
+    //   cover: "/placeholder.svg",
+    // },
+    // {
+    //   title: "Book 3",
+    //   author: "Author 3",
+    //   genre: "Genre 3",
+    //   cover: "/placeholder.svg",
+    // },
   ]);
 
-  const handleAddBook = (newBook: Book) => {
-    setBooks([...books, newBook]);
+  const handleAddBook = async (newBook: Book) => {
+    try {
+      const response = await fetch("/api/books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newBook),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error adding book: ${response.statusText}`);
+      }
+
+      const addedBook = await response.json();
+      setBooks((prevBooks) => [...prevBooks, addedBook.book]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleDeleteBook = (index: number) => {
-    const updatedBooks = [...books];
-    updatedBooks.splice(index, 1);
-    setBooks(updatedBooks);
+  const handleDeleteBook = async (id: number | undefined) => {
+    try {
+      if (id === undefined) {
+        console.log("Invalid index");
+        return;
+      }
+
+      const response = await fetch(`/api/books/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error deleting book: ${response.statusText}`);
+      }
+
+      const deletedBook = await response.json();
+
+      setBooks((prevBooks) =>
+        prevBooks.filter((book, index) => book.id !== id)
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    const fetchBooksData = async () => {
+      try {
+        const response = await fetch("/api/books");
+        if (!response.ok) {
+          throw new Error(`Error fetching books: ${response.statusText}`);
+        }
+
+        const booksData = await response.json();
+        setBooks(booksData.books as Book[]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchBooksData();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -62,13 +117,17 @@ export default function Component() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {books.map((book, index) => (
-          <Card key={index}>
+          <Card key={book.id}>
             <CardContent className="flex flex-col items-start gap-4 p-4 min-h-full">
               <img
                 alt="Book Cover"
                 className="aspect-[2/3] object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800"
                 height={150}
-                src={book.cover}
+                src={
+                  book.cover
+                    ? book.cover
+                    : "https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png"
+                }
                 width={100}
               />
               <div className="flex flex-col gap-2 w-full flex-grow justify-between">
@@ -84,7 +143,7 @@ export default function Component() {
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => handleDeleteBook(index)}
+                  onClick={() => handleDeleteBook(book.id)}
                   className=""
                 >
                   <TrashIcon className="w-4 h-4 mr-2" />
