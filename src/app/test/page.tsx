@@ -94,7 +94,6 @@ export default function Component() {
             </CardContent>
           </Card>
         ))}
-        {/* <AddBookCard handleAddBook={handleAddBook} /> */}
       </div>
     </div>
   );
@@ -113,70 +112,6 @@ function AddBook({
           <PlusIcon className="w-4 h-4" />
           Add Book
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add Book</DialogTitle>
-        </DialogHeader>
-        <form
-          className="space-y-4"
-          onSubmit={(e: FormEvent) => {
-            e.preventDefault();
-            const formData = new FormData(e.target as HTMLFormElement);
-            const newBook: Book = {
-              title: formData.get("title") as string,
-              author: formData.get("author") as string,
-              genre: formData.get("genre") as string,
-              cover: formData.get("cover")
-                ? (formData.get("cover") as string)
-                : "https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png",
-            };
-            handleAddBook(newBook);
-            setOpen(false);
-          }}
-        >
-          <div className="space-y-1">
-            <Label htmlFor="title">Title</Label>
-            <Input id="title" name="title" required />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="author">Author</Label>
-            <Input id="author" name="author" required />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="genre">Genre</Label>
-            <Input id="genre" name="genre" required />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="cover">Cover Image URL</Label>
-            <Input id="cover" name="cover" type="url" />
-          </div>
-          <DialogFooter>
-            <Button className="w-full" type="submit">
-              Add Book
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-function AddBookCard({
-  handleAddBook,
-}: {
-  handleAddBook: (newBook: Book) => void;
-}) {
-  const [open, setOpen] = useState<boolean>(false);
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center font-bold text-2xl gap-4 p-4 min-h-full">
-            <PlusIcon className="w-4 h-4" />
-            Add Book
-          </CardContent>
-        </Card>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
