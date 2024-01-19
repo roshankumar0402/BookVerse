@@ -92,13 +92,15 @@ export default function Component() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Book Collection</h1>
+        <h1 className="text-2xl font-bold">
+          BookVerse - A collection of the best Books!
+        </h1>
         <AddBook handleAddBook={handleAddBook} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {books.map((book, index) => (
           <Card key={book.id}>
-            <CardContent className="flex flex-col items-start gap-4 p-4 min-h-full">
+            <CardContent className="flex flex-col items-start gap-4 p-4 min-h-full bg-gray-100">
               <img
                 alt="Book Cover"
                 className="aspect-[2/3] object-cover border border-gray-200 w-full rounded-lg overflow-hidden dark:border-gray-800"
@@ -114,17 +116,17 @@ export default function Component() {
                 <div className="flex flex-col gap-2 w-full">
                   <h3 className="font-semibold text-lg">{book.title}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {book.author}
+                    Author: {book.author}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {book.genre}
+                    Genre: {book.genre}
                   </p>
                 </div>
                 <Button
                   size="sm"
-                  variant="outline"
+                  variant="destructive"
                   onClick={() => handleDeleteBook(book.id)}
-                  className=""
+                  className="bg-red-600 font-bold text-white"
                 >
                   <TrashIcon className="w-4 h-4 mr-2" />
                   Delete
@@ -148,14 +150,17 @@ function AddBook({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-2" variant="outline">
+        <Button
+          className="flex items-center gap-2 bg-slate-600 text-white"
+          variant="default"
+        >
           <PlusIcon className="w-4 h-4" />
           Add Book
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Book</DialogTitle>
+          <DialogTitle>Fill details of new Book</DialogTitle>
         </DialogHeader>
         <form
           className="space-y-4"
@@ -211,7 +216,7 @@ function AddBookCard({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Card>
-          <CardContent className="flex flex-col items-center justify-center font-bold text-2xl gap-4 p-4 min-h-full">
+          <CardContent className="flex flex-col items-center justify-center font-bold text-2xl gap-4 p-4 min-h-full bg-gray-100">
             <PlusIcon className="w-4 h-4" />
             Add Book
           </CardContent>
