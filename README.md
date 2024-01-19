@@ -34,7 +34,7 @@ This full-stack web application enables users to manage a collection of books, o
 - Front-end deployed on Vercel.
 - Database hosted on PlanetScale.
 - Considered security and data validation during deployment.
-- URL - https://roshan-metalmann-assignment.vercel.app/
+- URL - https://bookverse-roshan.vercel.app
 
 ## Design Decisions
 
