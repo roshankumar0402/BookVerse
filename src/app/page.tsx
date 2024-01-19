@@ -23,27 +23,7 @@ export type Book = {
 };
 
 export default function Component() {
-  const [books, setBooks] = useState<Book[]>([
-    // {
-    //   title: "Harry potter and the order of phoenix",
-    //   author: "Author 1",
-    //   genre: "Genre 1",
-    //   cover:
-    //     "https://1.bp.blogspot.com/-HRRu6dw6FTI/UiGGOYfeeII/AAAAAAAAAV4/aLFjY4lAAXkpQzVzVrmi0Nicu-kNwqeKwCPcB/s1600/german.jpg",
-    // },
-    // {
-    //   title: "Book 2",
-    //   author: "Author 2",
-    //   genre: "Genre 2",
-    //   cover: "/placeholder.svg",
-    // },
-    // {
-    //   title: "Book 3",
-    //   author: "Author 3",
-    //   genre: "Genre 3",
-    //   cover: "/placeholder.svg",
-    // },
-  ]);
+  const [books, setBooks] = useState<Book[]>([]);
 
   const handleAddBook = async (newBook: Book) => {
     try {
