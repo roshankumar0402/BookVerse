@@ -133,7 +133,7 @@ export default function Component() {
             </CardContent>
           </Card>
         ))}
-        {/* <AddBookCard handleAddBook={handleAddBook} /> */}
+        <AddBookCard handleAddBook={handleAddBook} />
       </div>
     </div>
   );
