@@ -58,3 +58,14 @@ This full-stack web application enables users to manage a collection of books, o
 
 - **Deployment on Vercel:** Deployed the front-end on Vercel for easy accessibility.
 - **Database Hosting on PlanetScale:** Hosted the database on PlanetScale for efficient data management.
+
+## Images
+
+- **Main page in Vercel:**
+  ![Screenshot of the main page in Vercel](/images/MainPage_in_vercel.png)
+
+- **Second page with add book after the last book, which makes it easier to add book after going through all books:**
+  ![Screenshot of the second page in Vercel](/images/MainPage_in_vercel_2.png)
+
+- **MySQL Workbench:**
+  ![Screenshot of MySQL Workbench](/images/SQL_workbench.png)
