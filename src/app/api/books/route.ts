@@ -3,11 +3,13 @@ import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
 
+// GET request handler to fetch all books
 export async function GET() {
   const books = await prisma.book.findMany();
   return Response.json({ books });
 }
 
+// POST request handler to add a new book with error-handling
 export async function POST(req: NextRequest) {
   try {
     const newBook = (await req.json()) as {
@@ -37,6 +39,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// DELETE request handler to delete a book with error-handling
 export async function DELETE(req: NextRequest) {
   const body = req.json() as { id?: number };
   const bookId = body.id;

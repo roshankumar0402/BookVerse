@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BookVerse
 
-## Getting Started
+This full-stack web application enables users to manage a collection of books, offering features like listing, adding, and deleting books.
 
-First, run the development server:
+## Technologies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Front-End:**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  - React.js with Next.js
+  - Tailwind CSS
+  - Shadcn Radix UI Component libraries
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Back-End:**
+  - Next.js API route handlers
+  - MySQL via PlanetScale
+  - Prisma as ORM, schema made with it
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Project Overview
 
-## Learn More
+### Front-End
 
-To learn more about Next.js, take a look at the following resources:
+- Components for book listing, addition, and deletion.
+- Responsive design for various devices.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Back-End
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Next.js API route handlers managing RESTful API requests.
+- MySQL integration for data storage.
+- CRUD operations for book data.
+- Covers edge cases like incomplete book information and deleting nonexistent books.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Front-end deployed on Vercel.
+- Database hosted on PlanetScale.
+- Considered security and data validation during deployment.
+- URL - https://roshan-metalmann-assignment.vercel.app/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Design Decisions
+
+### Front-End
+
+- **React.js with Next.js:** Chose Next.js for server-side rendering, providing better performance and SEO.
+- **Tailwind CSS:** Utilized for rapid styling, providing a clean and responsive design.
+- **Shadcn Radix UI Libraries:** Incorporated various Shadcn UI libraries for enhanced UI components and user interaction.
+
+### Back-End
+
+- **Next.js:** Selected Next.js for building a robust and scalable back-end server.
+- **MySQL Integration:** Integrated MySQL for efficient and relational data storage.
+
+### Challenges Faced
+
+- **Database Selection:** Choosing the right database for the project was crucial. Decided on MySQL for its relational capabilities.
+- **Deployment Configuration:** Configuring deployment on Vercel and integrating the database on PlanetScale required careful consideration.
+
+### Additional Features
+
+- **Deployment on Vercel:** Deployed the front-end on Vercel for easy accessibility.
+- **Database Hosting on PlanetScale:** Hosted the database on PlanetScale for efficient data management.

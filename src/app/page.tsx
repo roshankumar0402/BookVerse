@@ -1,5 +1,6 @@
 "use client";
 
+// Importing UI components from the specified paths
 import { Button } from "@/components/ui/button";
 import { CardContent, Card } from "@/components/ui/card";
 import {
@@ -14,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import React, { FormEvent, useEffect, useState } from "react";
 
+// Defining the structure of a Book
 export type Book = {
   id?: number;
   title: string;
@@ -22,10 +24,14 @@ export type Book = {
   cover?: string;
 };
 
+// Main component
 export default function Component() {
+  // State to manage the list of books
   const [books, setBooks] = useState<Book[]>([]);
 
+  // Function to handle adding a new book
   const handleAddBook = async (newBook: Book) => {
+    // Make a POST request to add a new book and Handle errors if the response is not ok
     try {
       const response = await fetch("/api/books", {
         method: "POST",
@@ -39,6 +45,7 @@ export default function Component() {
         throw new Error(`Error adding book: ${response.statusText}`);
       }
 
+      // Parse the response and update the books state
       const addedBook = await response.json();
       setBooks((prevBooks) => [...prevBooks, addedBook.book]);
     } catch (error) {
@@ -46,13 +53,16 @@ export default function Component() {
     }
   };
 
+  // Function to handle deleting a book
   const handleDeleteBook = async (id: number | undefined) => {
     try {
+      // Check for invalid index
       if (id === undefined) {
         console.log("Invalid index");
         return;
       }
 
+      // Make a DELETE request to delete a book and Handle errors if the response is not ok
       const response = await fetch(`/api/books/${id}`, {
         method: "DELETE",
       });
@@ -61,6 +71,7 @@ export default function Component() {
         throw new Error(`Error deleting book: ${response.statusText}`);
       }
 
+      // Parse the response and update the books state
       const deletedBook = await response.json();
 
       setBooks((prevBooks) =>
@@ -71,6 +82,7 @@ export default function Component() {
     }
   };
 
+  // Fetch books data on component mount
   useEffect(() => {
     const fetchBooksData = async () => {
       try {
@@ -89,6 +101,7 @@ export default function Component() {
     fetchBooksData();
   }, []);
 
+  // Rendering the main component UI
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex justify-between items-center mb-6">
@@ -141,12 +154,15 @@ export default function Component() {
   );
 }
 
+// Component for adding a new book with a dialog
 function AddBook({
   handleAddBook,
 }: {
   handleAddBook: (newBook: Book) => void;
 }) {
   const [open, setOpen] = useState<boolean>(false);
+
+  // Render the add book button with a dialog trigger
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -158,10 +174,12 @@ function AddBook({
           Add Book
         </Button>
       </DialogTrigger>
+      {/* Dialog content for adding a new book */}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Fill details of new Book</DialogTitle>
         </DialogHeader>
+        {/* Form for adding a new book */}
         <form
           className="space-y-4"
           onSubmit={(e: FormEvent) => {
@@ -206,6 +224,7 @@ function AddBook({
   );
 }
 
+// Component for adding a new book card with a dialog
 function AddBookCard({
   handleAddBook,
 }: {
@@ -270,6 +289,7 @@ function AddBookCard({
   );
 }
 
+// SVG icon component for a plus sign
 function PlusIcon(props: any) {
   return (
     <svg
@@ -290,6 +310,7 @@ function PlusIcon(props: any) {
   );
 }
 
+// SVG icon component for a trash bin
 function TrashIcon(props: any) {
   return (
     <svg
