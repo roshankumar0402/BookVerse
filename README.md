@@ -40,9 +40,9 @@ This full-stack web application enables users to manage a collection of books, o
 
 ### Front-End
 
-- **React.js with Next.js:** Chose Next.js for server-side rendering, providing better performance and SEO.
+- **React.js with Next.js:** Next.js for server-side rendering, providing better performance and SEO.
 - **Tailwind CSS:** Utilized for rapid styling, providing a clean and responsive design.
-- **Shadcn Radix UI Libraries:** Incorporated various Shadcn UI libraries for enhanced UI components and user interaction.
+- **Shadcn Radix UI Libraries:** Incorporated various Shadcn Radix UI libraries for enhanced UI components and user interaction.
 
 ### Back-End
 
