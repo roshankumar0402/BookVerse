@@ -9,13 +9,12 @@ export async function DELETE(
   return Response.json("Successfully Deleted");
 }
 
-export async function UPDATE(
-    request: Request,
-    { params }: { params: { bookId: string } }
-  ) {
-    const bookId = params.bookId;
-    const body = request.json();
-    await prisma.book.update({ where: { id: parseInt(bookId) }, data: {body.} });
-    return Response.json("Successfully Updated");
-  }
-  
+// export async function UPDATE(
+//     request: Request,
+//     { params }: { params: { bookId: string } }
+//   ) {
+//     const bookId = params.bookId;
+//     const body = request.json();
+//     await prisma.book.update({ where: { id: parseInt(bookId) }, data: {body.} });
+//     return Response.json("Successfully Updated");
+//   }
